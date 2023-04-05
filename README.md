@@ -1,8 +1,6 @@
 # actions-test
 
 [![GitHub Super-Linter](https://github.com/costaTest/actions-test/actions/workflows/actions-test.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
-[![Flake8 Linter](https://github.com/costaTest/actions-test/actions/workflows/flake8-lint.yml/badge.svg)](https://github.com/marketplace/actions/flake8-lint)
-[![Pytest](https://github.com/costaTest/actions-test/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/marketplace/actions/unit-tests)
 
 Testing GitHub Actions
 
