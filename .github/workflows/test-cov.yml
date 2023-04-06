@@ -1,29 +1,25 @@
-name: Test Code Coverage
+name: Code Coverage
 
 on: [push, pull_request]
 
 jobs:
-  test:
-    strategy:
-      matrix:
-        python-version:
-          - 3.9
+  run:
     runs-on: ubuntu-latest
+    env:
+      OS: ubuntu-latest
+      PYTHON: '3.9'
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - uses: lpenz/ghaction-pytest-cov@v1
-      - uses: AndreMiras/coveralls-python-action@v20201129
-        with:
-          parallel: true
-          flag-name: python-${{ matrix.python-version }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-  coverage-finish:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: AndreMiras/coveralls-python-action@v20201129
-        with:
-          parallel-finished: true
+    - uses: checkout@v2
+      with:
+        fetch-depth: ‘2’
+
+    - name: Setup Python
+      uses: actions/setup-python@master
+      with:
+        python-version: 3.7
+    - name: Generate Report
+      run: |
+        pip install coverage
+        coverage run -m unittest
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v2

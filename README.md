@@ -26,3 +26,16 @@ python3 -m flake8
 ## PyTest
 
 To run locally, install pytest and run pytest.
+
+```bash
+python3 -m pytest
+```
+
+## PyTest Code Coverage
+
+To run locally:
+```bash
+python -m pytest
+coverage run -m pytest
+coverage report
+```
