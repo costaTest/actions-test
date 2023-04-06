@@ -3,25 +3,19 @@ name: Code Coverage
 on: [push, pull_request]
 
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest
-    env:
-      OS: ubuntu-latest
-      PYTHON: '3.9'
+    name: Test python API
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: ‘2’
-
-    - name: Setup Python
-      uses: actions/setup-python@master
-      with:
-        python-version: 3.9
-    - name: Generate Report
+    - uses: actions/checkout@v1
+    - name: Install requirements
+      run: pip install -r requirements.txt
+    - name: Run tests and collect coverage
+      run: pytest --cov .
+    - name: Upload coverage reports to Codecov
       run: |
-        pip install pytest pytest-cov coverage
-        coverage run -m pytest
-    - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v2
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Replace `linux` below with the appropriate OS
+        # Options are `alpine`, `linux`, `macos`, `windows`
+        curl -Os https://uploader.codecov.io/latest/alpine/codecov
+        chmod +x codecov
+        ./codecov -t ${CODECOV_TOKEN}
