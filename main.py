@@ -2,9 +2,7 @@
 
 
 def main():
-    names = ["Tom", "Dick", "Harry"]
-    for n in names:
-        print("Hey", n)
+    print("Caesar Cipher v0.1")
 
 
 if __name__ == "__main__":
